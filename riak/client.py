@@ -276,3 +276,14 @@ class RiakClient(object):
         """
         mr = RiakMapReduce(self)
         return apply(mr.reduce, args)
+        
+    def __getattr__(self, name):
+        """
+        Get a bucket directly by passing it's name.
+        
+        Returns a new ``RiakBucket`` instance.
+        
+        :param name: The bucket name
+        :type name: string
+        """
+        return RiakBucket(self, name)
